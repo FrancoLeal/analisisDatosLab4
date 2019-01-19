@@ -35,8 +35,10 @@ data[data["ALBUMIN"] < 3.4,"ALBUMIN"] <- 0
 data[data["ALBUMIN"] > 5.4,"ALBUMIN"] <- 0
 data[data["ALBUMIN"] != 0,"ALBUMIN"] <- 1
 
-data[data["PROTIME"] <= 60,"PROTIME"] <- 0
-data[data["PROTIME"] > 60,"PROTIME"] <- 1
+meanPT = mean(data$PROTIME)
+
+data[data["PROTIME"] <= meanPT,"PROTIME"] <- 0
+data[data["PROTIME"] > meanPT,"PROTIME"] <- 1
 
 data[names] <- lapply(data[names], factor)
 
